@@ -231,8 +231,56 @@ qplot(clarity, data = diamonds, geom = "bar",
 ggsave("disc-disc-3.png", width = width, height = height)
 
 
+# make mosaic plots, not native to ggplot2
+library(vcd)
+tab <- table(diamonds[,c("clarity","cut")])
+mosaicplot(tab)
+
+props <- ddply(diamonds, "clarity", function(df){
+  table(df$cut) / nrow(df)
+})
+
+mprops <- melt(props, id = "clarity")
+ggplot(data = mprops) +
+  geom_bar(
+    aes(x = clarity, y = value, fill = variable), 
+    stat = "identity"
+  ) +
+  scale_x_discrete("Clarity") +
+  scale_y_continuous("Relative Frequency") +
+  scale_fill_discrete("Cut")
+ggsave("disc-disc-4.png", width = width, height = height)
 
 
 
 
+clarityFreqs <- table(diamonds$clarity) / nrow(diamonds)
+cumClarFreqs <- unname(c(0,cumsum(clarityFreqs)))
+
+props <- ddply(diamonds, "clarity", function(df){
+  y <- unname(cumsum(c(0, table(df$cut) / nrow(df))))  
+  n <- length(y)
+  data.frame(ymin = y[1:(n-1)], ymax = y[2:n])
+})
+props$cut <- rep(levels(diamonds$cut), 8)
+props$cut <- factor(props$cut,
+  levels = levels(diamonds$cut), ordered = TRUE
+)
+props$xmin <- rep(cumClarFreqs[1:8], each = 5)
+props$xmax <- rep(cumClarFreqs[2:9], each = 5)
+
+# make x breaks
+xBreaks <- cumClarFreqs[1:8] + diff(cumClarFreqs)/2
+names(xBreaks) <- levels(diamonds$clarity)
+ggplot(data = props) +
+  geom_rect(aes(
+    xmin = xmin, xmax = xmax,
+    ymin = ymin, ymax = ymax,
+    fill = cut
+  ), color = "white") +
+  scale_color_discrete(guide = "none") +
+  scale_fill_discrete("Cut") +
+  scale_x_continuous("Clarity", breaks = xBreaks, expand = c(0,0)) +
+  scale_y_continuous("Relative Frequency", expand = c(0,0))
+ggsave("disc-disc-5.png", width = width, height = height)
 
