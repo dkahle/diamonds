@@ -253,7 +253,6 @@ ggsave("disc-disc-4.png", width = width, height = height)
 
 
 
-
 clarityFreqs <- table(diamonds$clarity) / nrow(diamonds)
 cumClarFreqs <- unname(c(0,cumsum(clarityFreqs)))
 
