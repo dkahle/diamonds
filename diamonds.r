@@ -11,7 +11,7 @@ height <- 3 # graphic height
 #####################################################################
 
 
-write.csv(diamonds, "diamonds.csv", row.names = FALSE)
+# write.csv(diamonds, "diamonds.csv", row.names = FALSE)
 file.show("diamonds.csv")
 
 length(unique(diamonds$price))
@@ -160,32 +160,46 @@ ggsave("kdeHist.pdf", width = width, height = height)
 qplot(carat, price, data = diamonds) +
   scale_x_continuous("Carat") +
   scale_y_continuous("Price")
-ggsave("2dscatterplot.png", width = width, height = height)
+ggsave("cont-cont-1.png", width = width, height = height)
 
 qplot(carat, price, data = diamonds, alpha = I(.05), size = I(1)) +
   scale_x_continuous("Carat") +
   scale_y_continuous("Price")
-ggsave("2dscatterplotalpha.png", width = width, height = height)
+ggsave("cont-cont-2.png", width = width, height = height)
 
 qplot(carat, price, data = diamonds, geom = "bin2d") +
   scale_x_continuous("Carat") +
   scale_y_continuous("Price") +
   scale_fill_continuous("Frequency")
-ggsave("Histogram2dTopColor.pdf", width = width, height = height)
+ggsave("cont-cont-3.png", width = width, height = height)
 
-qplot(carat, price, data = diamonds, geom = "bin2d") +
+qplot(carat, price, data = diamonds, geom = "hex", bins = 100) +
+  scale_x_continuous("Carat") +
+  scale_y_continuous("Price") +
+  scale_fill_gradientn("Frequency",
+    colours = c("#132B43", "#56B1F7", "yellow", "red"),
+    values = c(0.00, 0.025, 0.15, 1.00),
+    breaks = c(100,250,500,1000,2000)
+  )
+ggsave("cont-cont-4.png", width = width, height = height)
+
+
+qplot(carat, price, data = diamonds, geom = "hex", bins = 100) +
   stat_smooth(color = "red", size = 2) +
   scale_x_continuous("Carat") +
   scale_y_continuous("Price") +
-  scale_fill_continuous("Frequency")
-ggsave("Histogram2dTopColorSmoother.pdf", width = width, height = height)
-
+  scale_fill_gradientn("Frequency",
+    colours = c("#132B43", "#56B1F7", "yellow", "red"),
+    values = c(0.00, 0.025, 0.15, 1.00),
+    breaks = c(100,250,500,1000,2000)
+  )
+ggsave("cont-cont-5.png", width = width, height = height)
 
 ggplot(aes(x = carat, y = price), data = diamonds) +
   stat_density2d() +
   scale_x_continuous("Carat", lim = c(0,4)) +
   scale_y_continuous("Price", lim = c(0,18000))
-ggsave("ContourPlot.pdf", width = width, height = height)
+ggsave("cont-cont-6.png", width = width, height = height)
 
 #####################################################################
 #################### two-dim disc-cont           ####################
