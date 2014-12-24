@@ -193,6 +193,7 @@ qplot(carat, price, data = diamonds, geom = "hex", bins = 100) +
     values = c(0.00, 0.025, 0.15, 1.00),
     breaks = c(100,250,500,1000,2000)
   )
+
 ggsave("cont-cont-5.png", width = width, height = height)
 
 ggplot(aes(x = carat, y = price), data = diamonds) +
