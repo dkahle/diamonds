@@ -1,0 +1,30 @@
+NAME: diamonds.csv
+TYPE: Observational sample
+SIZE: 53940 observations (diamonds) each with 10 measurements
+ARTICLE TITLE: Seeing Diamonds: Statistical Graphics in the Introductory Course
+DESCRIPTIVE ABSTRACT:
+Data visualization and exploratory data analysis are prime places in which individuals of all walks of life encounter statistics on a daily basis.  This is especially true with the advent of “big data”, where complex relationships are the norm and out-of-the-box elementary statistical procedures must be applied with great care. These realizations rightly call us, as statistics educators, to redouble our efforts in teaching these most basic statistical methodologies in the introductory course. In this article we show how Wickham’s diamonds dataset can be used to illustrate a wide variety of statistical concepts and graphics in the introductory course.
+SOURCES: 
+Wickham, H. (2009), ggplot2: Elegant Graphics for Data Analysis, New York, NY: Springer.
+VARIABLE DESCRIPTIONS:
+The dataset is in .csv format, or is directly accessible via the following code in R:
+R> install.packages("ggplot2")
+R> library(ggplot2)
+R> diamonds
+The variables are as follows :
+carat – the size of the diamonds, in carats (1carat = 200 grams)
+cut – a factor variable (ordered in R) with levels Fair, Good, Very Good, Premium, Ideal
+color – a factor variable (ordered in R) with levels D, E, F, G, H, I, and J (in decreasing order of quality)
+clarity – a factor variable (ordered in R) with levels Internally Flawless (IF), Very Very Slightly Included 1 and 2 (VVS1 and VVS2), Very Slightly Included 1 and 2 (VS1 and VS2), Slightly Included 1 and 2 (SI1 and SI2), and Included 1 (I1) (in decreasing order of quality)
+depth, x, y, z – physical dimensions of the diamond, described in the article
+table – a dimensionless proportion defined as the ratio of the width of the top facet of the diamond and the maximum width of the diamond
+price – price of the diamond, in US dollars.
+STORY BEHIND THE DATA:
+This data was scraped from the web.A brief narrative describing the origins of the data and the reasons they were collected. This is a good place to supply any background needed to understand the underlying variables, describe relevant issues, and suggest questions which might be of interest. This and the next section should be fairly concise. If you find them getting too long -- it's time to write a full "Datasets" article!
+PEDAGOGICAL NOTES:
+The data is ideal for describing all sorts of descriptive statistics.  In terms of graphical descriptives, the dataset can be used to exemplify pie and bar charts, 1 and 2d histograms and their bin widths, 1 and 2d kernel density estimators (contour plots) and their bandwidths, dodged and stacked bar charts, mosaic plots, faceting plots and aesthetics.  Numerical descriptives can be illustrated as well.
+SUBMITTED BY:
+David Kahle
+Baylor University
+One Bear Place #97140, Waco, Texas, 76706
+david_kahle@baylor.edu
