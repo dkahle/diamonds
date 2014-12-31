@@ -23,7 +23,7 @@ This page is intended to accompany the article _Seeing Diamonds: Statistical Gra
 
 Load in the required libraries.
 
-```R
+```{r, echo = TRUE}
 library(ggplot2); theme_set(theme_bw(14))
 library(plyr)
 library(reshape2)
@@ -31,7 +31,7 @@ library(reshape2)
 
 ## Export the diamonds dataset as a .csv file
 
-```R
+```{r, echo = TRUE}
 # write.csv(diamonds, "diamonds.csv", row.names = FALSE)
 file.show("diamonds.csv")
 
@@ -45,7 +45,7 @@ p <- ncol(diamonds)
 
 Compute the frequency and relative frequency distributions.
 
-```R
+```{r, echo = TRUE}
 table(diamonds$cut)
 round(table(diamonds$cut) / n, 3)
 sum(round(table(diamonds$cut) / n, 3)) # take the .001 off of ideal
@@ -53,14 +53,14 @@ sum(round(table(diamonds$cut) / n, 3)) # take the .001 off of ideal
 
 The bar chart:
 
-```R
+```{r, echo = TRUE}
 qplot(cut, data = diamonds) +
    xlab("Cut") + ylab("Frequency")
 ```
 
 The pie chart:
 
-```R
+```{r, echo = TRUE}
 ggplot(
     aes(x = 1, y = V1, fill = cut), 
    data = ddply(diamonds, "cut", nrow)
@@ -75,7 +75,7 @@ ggplot(
 
 Extract the 50 diamonds to make the graphics:
 
-```R
+```{r, echo = TRUE}
 set.seed(1)
 fiftyRows <- sample(n, 50)
 fiftyDiamonds <- diamonds[fiftyRows,]
@@ -85,7 +85,7 @@ fiftyDiamonds <- diamonds[fiftyRows,]
 
 Make the 1d scatterplot:
 
-```R
+```{r, echo = TRUE}
 qplot(carat, 0L, data = fiftyDiamonds, size = I(8)) +
   geom_hline(yintercept = 0) +
   scale_x_continuous("Carat", lim = c(0,2.5)) +
@@ -94,7 +94,7 @@ qplot(carat, 0L, data = fiftyDiamonds, size = I(8)) +
 
 Sample the points to jitter on the _y_ axis and then make the jittered scatterplot:
 
-```R
+```{r, echo = TRUE}
 fiftyDiamonds$yValues <- runif(50, -1, 1)
 qplot(carat, yValues, data = fiftyDiamonds, size = I(8)) +
   geom_hline(yintercept = 0) +
@@ -104,7 +104,7 @@ qplot(carat, yValues, data = fiftyDiamonds, size = I(8)) +
 
 Use alpha blending:
 
-```R
+```{r, echo = TRUE}
 qplot(carat, yValues, data = fiftyDiamonds, size = I(8), alpha = I(.33)) +
   geom_hline(yintercept = 0) +
   scale_x_continuous("Carat", lim = c(0,2.5)) +
@@ -113,7 +113,7 @@ qplot(carat, yValues, data = fiftyDiamonds, size = I(8), alpha = I(.33)) +
 
 And resize the points:
 
-```R
+```{r, echo = TRUE}
 qplot(carat, yValues, data = fiftyDiamonds, size = I(5), alpha = I(.33)) +
   geom_hline(yintercept = 0) +
   scale_x_continuous("Carat", lim = c(0,2.5)) +
@@ -122,7 +122,7 @@ qplot(carat, yValues, data = fiftyDiamonds, size = I(5), alpha = I(.33)) +
 
 Do all three at once:
 
-```R
+```{r, echo = TRUE}
 qplot(carat, runif(n, -1, 1), data = diamonds, size = I(5), alpha = I(.01)) +
   geom_hline(yintercept = 0) +
   scale_x_continuous("Carat", lim = c(0,2.5)) +
@@ -133,7 +133,7 @@ qplot(carat, runif(n, -1, 1), data = diamonds, size = I(5), alpha = I(.01)) +
 
 The basic histogram (binwidth = .17):
 
-```R
+```{r, echo = TRUE}
 qplot(carat, data = diamonds) +
   scale_x_continuous("Carat", lim = c(0,5)) +
   ylab("Frequency")
@@ -141,7 +141,7 @@ qplot(carat, data = diamonds) +
 
 The histograms with binwidth 2 and .01:
 
-```R
+```{r, echo = TRUE}
 qplot(carat, data = diamonds, binwidth = 2) +
   scale_x_continuous("Carat", lim = c(0,5)) +
   ylab("Frequency")
@@ -154,7 +154,7 @@ qplot(carat, data = diamonds, binwidth = .01) +
 
 Compute the price differences between just under 1 and just over 1 carat diamonds:
 
-```R
+```{r, echo = TRUE}
 slightlySmallerDiamonds <- subset(diamonds, .99 <= carat & carat < 1)
 nrow(slightlySmallerDiamonds)
 mean(slightlySmallerDiamonds$price)
@@ -179,7 +179,7 @@ t.test(
 
 ### Kernel density estimators
 
-```R
+```{r, echo = TRUE}
 # the x-axis sequence on which to eval the kernels
 s <- seq(0, 2.5, length.out = 501)
 
@@ -213,7 +213,7 @@ ggplot() +
 
 Make the associated histogram:
 
-```R
+```{r, echo = TRUE}
 qplot(carat, ..density.., data = fiftyDiamonds, geom = "histogram") +
   scale_x_continuous("Carat", lim = c(0,2.5)) +
   ylab("Density")
@@ -228,7 +228,7 @@ qplot(carat, ..density.., data = fiftyDiamonds, geom = "histogram") +
 
 The basic 2d scatterplot:
 
-```R
+```{r, echo = TRUE}
 qplot(carat, price, data = diamonds) +
   scale_x_continuous("Carat") +
   scale_y_continuous("Price")
@@ -236,7 +236,7 @@ qplot(carat, price, data = diamonds) +
 
 Use alpha blending and resize:
 
-```R
+```{r, echo = TRUE}
 qplot(carat, price, data = diamonds, alpha = I(.05), size = I(1)) +
   scale_x_continuous("Carat") +
   scale_y_continuous("Price")
@@ -246,7 +246,7 @@ qplot(carat, price, data = diamonds, alpha = I(.05), size = I(1)) +
 
 Make the basic 2d histogram:
 
-```R
+```{r, echo = TRUE}
 qplot(carat, price, data = diamonds, geom = "bin2d") +
   scale_x_continuous("Carat") +
   scale_y_continuous("Price") +
@@ -255,7 +255,7 @@ qplot(carat, price, data = diamonds, geom = "bin2d") +
 
 Make an elaborate 2d histogram:
 
-```R
+```{r, echo = TRUE}
 qplot(carat, price, data = diamonds, geom = "hex", bins = 100) +
   scale_x_continuous("Carat") +
   scale_y_continuous("Price") +
@@ -268,7 +268,7 @@ qplot(carat, price, data = diamonds, geom = "hex", bins = 100) +
 
 Add a smoother:
 
-```R
+```{r, echo = TRUE}
 qplot(carat, price, data = diamonds, geom = "hex", bins = 100) +
   stat_smooth(color = "red", size = 2) +
   scale_x_continuous("Carat") +
@@ -284,7 +284,7 @@ qplot(carat, price, data = diamonds, geom = "hex", bins = 100) +
 
 (The one in the paper is made with Mathematica.)
 
-```R
+```{r, echo = TRUE}
 ggplot(aes(x = carat, y = price), data = diamonds) +
   stat_density2d() +
   scale_x_continuous("Carat", lim = c(0,4)) +
@@ -296,7 +296,7 @@ ggplot(aes(x = carat, y = price), data = diamonds) +
 
 The naive scatterplot:
 
-```R
+```{r, echo = TRUE}
 qplot(clarity, price, data = diamonds) +
   scale_x_discrete("Clarity") +
   scale_y_continuous("Price")
@@ -304,7 +304,7 @@ qplot(clarity, price, data = diamonds) +
 
 Adding jittering and alpha blending:
 
-```R
+```{r, echo = TRUE}
 qplot(clarity, price, data = diamonds, geom = "jitter", alpha = I(.05)) +
   scale_x_discrete("Clarity") +
   scale_y_continuous("Price")
@@ -312,7 +312,7 @@ qplot(clarity, price, data = diamonds, geom = "jitter", alpha = I(.05)) +
 
 The boxplot:
 
-```R
+```{r, echo = TRUE}
 qplot(clarity, price, data = diamonds, geom = "boxplot") +
   scale_x_discrete("Clarity") +
   scale_y_continuous("Price")
@@ -320,7 +320,7 @@ qplot(clarity, price, data = diamonds, geom = "boxplot") +
 
 And the violin plot:
 
-```R
+```{r, echo = TRUE}
 qplot(clarity, price, data = diamonds, geom = "violin") +
   scale_x_discrete("Clarity") +
   scale_y_continuous("Price")
@@ -328,7 +328,7 @@ qplot(clarity, price, data = diamonds, geom = "violin") +
 
 The more complex graphic:
 
-```R
+```{r, echo = TRUE}
 diamonds$size <- cut(diamonds$carat, c(0,.5,1,1.5,2,2.5,5))
 
 qplot(clarity, price, 
@@ -344,7 +344,7 @@ qplot(clarity, price,
 
 Scatter plot (with jittering, alpha-blending, and resizing):
 
-```R
+```{r, echo = TRUE}
 qplot(clarity, cut, data = diamonds, geom = "jitter", 
     alpha = I(.05), size = I(1.5)
   ) +
@@ -356,21 +356,21 @@ qplot(clarity, cut, data = diamonds, geom = "jitter",
 
 The dodged bar chart:
 
-```R
+```{r, echo = TRUE}
 qplot(clarity, data = diamonds, geom = "bar", 
   fill = cut, position = "dodge")
 ```
 
 The stacked bar chart:
 
-```R
+```{r, echo = TRUE}
 qplot(clarity, data = diamonds, geom = "bar", 
   fill = cut, position = "stack")
 ```
 
 The pre-mosaic plot :
 
-```R
+```{r, echo = TRUE}
 props <- ddply(diamonds, "clarity", function(df){
   table(df$cut) / nrow(df)
 })
@@ -389,7 +389,7 @@ ggplot(data = mprops) +
 
 ### The mosaic plot
 
-```R
+```{r, echo = TRUE}
 source("ggmosaic.r")
 ggmosaic(clarity, cut, data = diamonds)
 ```
