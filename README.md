@@ -350,7 +350,7 @@ qplot(carat, price, data = diamonds, geom = "hex", bins = 100) +
 
 ### The contour plot
 
-(The one in the paper is made with Mathematica.)
+(The one in the paper is made with Mathematica, see that file.)
 
 ``` {.r}
 ggplot(aes(x = carat, y = price), data = diamonds) +
