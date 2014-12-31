@@ -11,7 +11,9 @@ output:
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
-  fig.path = "README-"
+  fig.path = "README-",
+  fig.width = 7,
+  fig.height = 3
 )
 ```
 
@@ -33,7 +35,7 @@ library(reshape2)
 
 ```{r, echo = TRUE}
 # write.csv(diamonds, "diamonds.csv", row.names = FALSE)
-file.show("diamonds.csv")
+# file.show("diamonds.csv")
 
 length(unique(diamonds$price))
 

@@ -23,7 +23,7 @@ Export the diamonds dataset as a .csv file
 
 ``` {.r}
 # write.csv(diamonds, "diamonds.csv", row.names = FALSE)
-file.show("diamonds.csv")
+# file.show("diamonds.csv")
 
 length(unique(diamonds$price))
 #> [1] 11602
