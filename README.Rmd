@@ -7,7 +7,6 @@ output:
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, echo = FALSE}
-
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -83,7 +82,7 @@ fiftyRows <- sample(n, 50)
 fiftyDiamonds <- diamonds[fiftyRows,]
 ```
 
-### Scatterplots
+#### Scatterplots
 
 Make the 1d scatterplot:
 
@@ -131,7 +130,7 @@ qplot(carat, runif(n, -1, 1), data = diamonds, size = I(5), alpha = I(.01)) +
   scale_y_continuous("", lim = c(-1,1), breaks = NULL)
 ```
 
-### Histograms
+#### Histograms
 
 The basic histogram (binwidth = .17):
 
@@ -179,7 +178,7 @@ t.test(
 ```
 
 
-### Kernel density estimators
+#### Kernel density estimators
 
 ```{r, echo = TRUE}
 # the x-axis sequence on which to eval the kernels
@@ -226,7 +225,7 @@ qplot(carat, ..density.., data = fiftyDiamonds, geom = "histogram") +
 
 ## Continuous-continuous graphics
 
-### The two-dimensional scatterplot
+#### The two-dimensional scatterplot
 
 The basic 2d scatterplot:
 
@@ -244,7 +243,7 @@ qplot(carat, price, data = diamonds, alpha = I(.05), size = I(1)) +
   scale_y_continuous("Price")
 ```
 
-### The two-dimensional histogram
+#### The two-dimensional histogram
 
 Make the basic 2d histogram:
 
@@ -282,7 +281,7 @@ qplot(carat, price, data = diamonds, geom = "hex", bins = 100) +
   )
 ```
 
-### The contour plot 
+#### The contour plot 
 
 (The one in the paper is made with Mathematica, see that file.)
 
@@ -354,7 +353,7 @@ qplot(clarity, cut, data = diamonds, geom = "jitter",
   scale_y_discrete("Cut")
 ```
 
-### Bar charts
+#### Bar charts
 
 The dodged bar chart:
 
@@ -389,7 +388,7 @@ ggplot(data = mprops) +
 ```
 
 
-### The mosaic plot
+#### The mosaic plot
 
 ```{r, echo = TRUE}
 source("ggmosaic.r")
