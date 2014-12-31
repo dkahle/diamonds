@@ -227,6 +227,20 @@ qplot(clarity, price, data = diamonds, geom = "violin") +
 ggsave("disc-cont-4.pdf", width = width, height = height)
 
 #####################################################################
+#################### complex                     ####################
+#####################################################################
+
+diamonds$size <- cut(diamonds$carat, c(0,.5,1,1.5,2,2.5,5))
+qplot(clarity, price, 
+    data = subset(diamonds, .5 < carat & carat <=2.5), 
+    geom = "boxplot", fill = cut, outlier.size = .25
+  ) + facet_grid(size ~ ., scales = "free") +
+  scale_x_discrete("Clarity") +
+  scale_y_continuous("Price") +
+  scale_fill_discrete("Cut")
+ggsave("disc-cont-5.pdf", width = width, height = height)
+
+#####################################################################
 #################### two-dim disc-disc           ####################
 #####################################################################
 
