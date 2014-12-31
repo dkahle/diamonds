@@ -1,0 +1,53 @@
+---
+output:
+  md_document:
+    variant: markdown_github
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
+
+# Diamonds
+
+
+
+__mpoly__ is a simple collection of tools to help deal with multivariate polynomials _symbolically_ and functionally in R.  Polynomials are defined with the `mp` function:
+
+```{r mp, echo = TRUE}
+library(mpoly)
+mp("x + y")
+mp("(x + 4y)^2 (x - .25)")
+```
+
+[Term orders](http://en.wikipedia.org/wiki/Lexicographical_order#Monomials) are available with the reorder function:
+```{r}
+(p <- mp("(x + y)^2 (1 + x)"))
+reorder(p, varorder = c('y','x'), order = 'lex')
+reorder(p, varorder = c('x','y'), order = 'glex')
+```
+
+
+
+## Installation
+
+* From CRAN: `install.packages("mpoly")`
+
+* From Github (dev version): 
+```R
+# install.packages("devtools")
+devtools::install_github("Rexamine/stringi")
+devtools::install_github("hadley/stringr")
+devtools::install_github("dkahle/mpoly")
+```
+
+
+
+
