@@ -124,7 +124,7 @@ s <- seq(0, 2.5, length.out = 501)
 little_densities <- lapply(as.list(fiftyDiamonds$carat), function(mu){
   dnorm(s, mu, sd = .05) / 50
 })
-df <- as.data.frame(t(plyr:::list_to_dataframe(little_densities)))
+df <- as.data.frame(little_densities)
 names(df) <- paste0("mu=", fiftyDiamonds$carat)
 df$x <- s
 mdf <- melt(df, id = "x")
